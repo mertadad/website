@@ -7,33 +7,42 @@
     <style>
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; }
         
-        /* VIDEO (Sabit ve Bulanık) */
+        /* VIDEO BACKGROUND (FULL SCREEN + BLUR) */
         #bg-video {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            transform: scale(1.05);
         }
 
-        /* BEYAZ MENÜ */
-        nav { background-color: rgba(255, 255, 255, 0.95); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .logo-link img { height: 80px; width: auto; transition: 0.3s; }
+        nav { background-color: rgba(255, 255, 255, 0.90); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-left { display: flex; align-items: center; }
+        
+        /* LOGO: logo.png */
+        .logo-link img { height: 120px; width: auto; margin-right: 25px; transition: opacity 0.3s; }
         .logo-link img:hover { opacity: 0.8; }
+        .site-title { font-size: 26px; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px; }
         
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
         nav ul li { margin-left: 30px; }
-        nav ul li a { text-decoration: none; color: #555; font-weight: 700; font-size: 20px; transition: 0.3s; }
-        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; }
+        nav ul li a { text-decoration: none; color: #555; font-weight: 700; font-size: 22px; transition: color 0.3s; }
+        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; padding-bottom: 5px; }
 
-        /* İÇERİK KUTUSU */
         .content-box {
-            background-color: rgba(255, 255, 255, 0.95); width: 80%; max-width: 900px; margin: 60px auto; padding: 60px;
+            background-color: rgba(255, 255, 255, 0.95); width: 80%; max-width: 900px; margin: 80px auto; padding: 60px;
             border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
         h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
         h3 { color: #00AEEF; margin-top: 40px; font-size: 1.5rem; }
         p { line-height: 1.8; color: #555; margin-bottom: 15px; font-size: 1.1rem; }
-        ul.report-list { margin-bottom: 20px; color: #555; font-size: 1.1rem; padding-left: 20px; line-height: 1.8; }
-        
-        footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
+        ul.report-list { margin-bottom: 20px; color: #555; font-size: 1.1rem; padding-left: 20px; line-height: 1.8;}
+        footer { background-color: #222; color: #aaa; text-align: center; padding: 20px; margin-top: 50px; }
     </style>
 </head>
 <body>
@@ -42,39 +51,28 @@
     </video>
     
     <nav>
-        <a href="index.html" class="logo-link"><img src="logo.png" alt="Home Logo"></a>
+        <div class="nav-left">
+            <a href="index.html" class="logo-link"><img src="logo.png" alt="Home Logo"></a>
+            <div class="site-title">NYC DATA</div>
+        </div>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="details.html" class="active">Project Details</a></li>
             <li><a href="visualization.html">Visualization</a></li>
+            <li><a href="details.html" class="active">Project Details</a></li>
         </ul>
     </nav>
-
     <div class="content-box">
         <h1>Project Report</h1>
-        
         <h3>1. Introduction & Goal</h3>
-        <p>
-            This project aims to understand micromobility trends in New York City. 
-            The Citi Bike system has become a critical part of the city's transportation network. 
-            By utilizing data science techniques, we aim to analyze user behavior and traffic flows.
-        </p>
-
+        <p>This project aims to understand micromobility trends in New York City.</p>
         <h3>2. Dataset & Methodology</h3>
-        <p>
-            The data used in this project is sourced from the Citi Bike open data portal. 
-            The dataset includes trip duration, start/end coordinates, and user types. 
-            Python (Pandas, Matplotlib, Folium) was used for data cleaning and visualization.
-        </p>
-
+        <p>The data used in this project is sourced from the Citi Bike open data portal.</p>
         <h3>3. Key Insights</h3>
         <ul class="report-list">
             <li><strong>Weather Impact:</strong> Weather conditions influence ride volume by approximately 60%.</li>
-            <li><strong>Commuter Flows:</strong> 80% of weekday traffic is directed towards major business districts during rush hours.</li>
-            <li><strong>Tourism:</strong> Weekend rides show a distinct pattern centered around parks and waterfronts.</li>
+            <li><strong>Commuter Flows:</strong> 80% of weekday traffic is directed towards major business districts.</li>
         </ul>
     </div>
-
-    <footer>© 2026 NYC Bike Project</footer>
+    <footer>© 2024 Data Science Project Team</footer>
 </body>
 </html>

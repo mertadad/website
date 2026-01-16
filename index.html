@@ -9,33 +9,38 @@
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; }
         .background-image {
             position: fixed; top: -20px; left: -20px; width: 110%; height: 110%; z-index: -1;
-            /* High quality blurry bike photo */
             background-image: url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=2071&auto=format&fit=crop');
             background-size: cover; background-position: center;
             filter: blur(6px); -webkit-filter: blur(6px);
         }
 
-        /* NAVBAR & LOGO (UPDATED SIZE) */
-        /* Increased padding for bigger logo */
+        /* NAVBAR & LOGO */
         nav { background-color: rgba(255, 255, 255, 0.95); padding: 15px 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         .nav-left { display: flex; align-items: center; }
         
-        /* BIGGER LOGO STYLE */
+        /* LOGO STYLE */
         .logo-link img {
-            height: 120px; /* MUCH BIGGER NOW */
+            height: 120px; 
             width: auto;
             margin-right: 25px;
             transition: opacity 0.3s;
-            border-radius: 0; /* Keeps original shape */
+            border-radius: 0; 
         }
         .logo-link img:hover { opacity: 0.8; }
 
         .site-title { font-size: 26px; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px; }
 
+        /* MENU STYLE (UPDATED FONT SIZE) */
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-        nav ul li { margin-left: 25px; }
-        nav ul li a { text-decoration: none; color: #555; font-weight: 600; font-size: 16px; transition: color 0.3s; }
-        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 2px solid #00AEEF; padding-bottom: 5px; }
+        nav ul li { margin-left: 30px; } /* Biraz daha aralık verdik */
+        nav ul li a { 
+            text-decoration: none; 
+            color: #555; 
+            font-weight: 700; /* Daha kalın */
+            font-size: 22px;  /* BÜYÜTÜLDÜ (Eskisi 16px idi) */
+            transition: color 0.3s; 
+        }
+        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; padding-bottom: 5px; }
 
         /* CONTENT BOX */
         .content-box {
@@ -45,7 +50,7 @@
         h1 { font-size: 3rem; color: #2c3e50; margin-bottom: 15px; }
         p.subtitle { font-size: 1.5rem; color: #7f8c8d; font-weight: 300; margin-bottom: 40px; }
         
-        .cta-btn { background-color: #00AEEF; color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 20px; font-size: 1.1rem;}
+        .cta-btn { background-color: #00AEEF; color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 20px; font-size: 1.2rem;}
         .cta-btn:hover { background-color: #008ac0; }
         footer { background-color: #222; color: #aaa; text-align: center; padding: 20px; margin-top: 50px; }
     </style>

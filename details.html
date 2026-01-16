@@ -12,19 +12,24 @@
             background-image: url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=2071&auto=format&fit=crop');
             background-size: cover; background-position: center; filter: blur(6px); -webkit-filter: blur(6px);
         }
-        /* NAVBAR & LOGO (UPDATED SIZE) */
+        /* NAVBAR & LOGO */
         nav { background-color: rgba(255, 255, 255, 0.95); padding: 15px 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         .nav-left { display: flex; align-items: center; }
-        
-        /* BIGGER LOGO STYLE */
         .logo-link img { height: 120px; width: auto; margin-right: 25px; transition: opacity 0.3s; border-radius: 0; }
         .logo-link img:hover { opacity: 0.8; }
-
         .site-title { font-size: 26px; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* MENU STYLE (UPDATED FONT SIZE) */
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-        nav ul li { margin-left: 25px; }
-        nav ul li a { text-decoration: none; color: #555; font-weight: 600; font-size: 16px; transition: color 0.3s; }
-        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 2px solid #00AEEF; padding-bottom: 5px; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { 
+            text-decoration: none; 
+            color: #555; 
+            font-weight: 700; 
+            font-size: 22px; /* BÜYÜTÜLDÜ */
+            transition: color 0.3s; 
+        }
+        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; padding-bottom: 5px; }
 
         /* CONTENT */
         .content-box {

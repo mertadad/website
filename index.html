@@ -8,20 +8,15 @@
         /* --- GENEL AYARLAR --- */
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; overflow-x: hidden; }
         
-        /* --- VİDEO ARKA PLAN (AGRESİF ZOOM TEKNİĞİ) --- */
+        /* --- VİDEO ARKA PLAN (TAM EKRAN + KENAR BOŞLUKSUZ) --- */
         #bg-video {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
             z-index: -1;
-            /* ÖNEMLİ KISIM BURASI: */
-            /* Videoyu %30 büyütür (scale 1.3) ve tam ortalar */
-            /* Böylece kenardaki siyahlıklar ekran dışına itilir */
-            transform: translate(-50%, -50%) scale(1.3); 
+            /* Videoyu %5 büyütüp ortalar, siyah kenarları yok eder */
+            transform: translate(-50%, -50%) scale(1.05);
             object-fit: cover;
         }
 
@@ -30,11 +25,9 @@
         .nav-left { display: flex; align-items: center; }
         
         /* LOGO: logo.png */
-        .logo-link img { height: 120px; width: auto; margin-right: 25px; transition: opacity 0.3s; border-radius: 0; }
+        .logo-link img { height: 120px; width: auto; margin-right: 0; transition: opacity 0.3s; }
         .logo-link img:hover { opacity: 0.8; }
         
-        .site-title { font-size: 26px; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px; }
-
         /* MENU STYLE */
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
         nav ul li { margin-left: 30px; }
@@ -50,7 +43,19 @@
         p.subtitle { font-size: 1.5rem; color: #7f8c8d; font-weight: 300; margin-bottom: 40px; }
         .cta-btn { background-color: #00AEEF; color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 20px; font-size: 1.2rem;}
         .cta-btn:hover { background-color: #008ac0; }
-        footer { background-color: #222; color: #aaa; text-align: center; padding: 20px; margin-top: 50px; }
+
+        /* --- YENİ FOOTER TASARIMI --- */
+        footer { 
+            background-color: #222; 
+            color: #aaa; 
+            padding: 30px 50px; 
+            margin-top: 50px;
+            display: flex; /* İçerikleri yan yana dizer */
+            justify-content: space-between; /* Biri sağa biri sola */
+            align-items: center;
+        }
+        .footer-title { font-weight: bold; font-size: 1.1rem; }
+        .footer-names { text-align: right; font-size: 0.9rem; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -62,7 +67,6 @@
     <nav>
         <div class="nav-left">
             <a href="index.html" class="logo-link"><img src="logo.png" alt="Home Logo"></a>
-            <div class="site-title">NYC DATA</div>
         </div>
         <ul>
             <li><a href="index.html" class="active">Home</a></li>
@@ -80,6 +84,14 @@
         <a href="visualization.html" class="cta-btn">Explore the Charts →</a>
     </div>
 
-    <footer>© 2024 Data Science Project Team</footer>
+    <footer>
+        <div class="footer-title">2026 IE 421 Data Science for Engineering</div>
+        <div class="footer-names">
+            Mert Ada Demirbaş<br>
+            Bersu Yılmaz<br>
+            Veli Erenay Açıl<br>
+            Emirhan Karaca
+        </div>
+    </footer>
 </body>
 </html>

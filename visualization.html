@@ -7,29 +7,28 @@
     <style>
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; overflow-x: hidden; }
         
-        /* VIDEO (Sabit ve Bulanık) */
+        /* VIDEO ARKA PLAN */
         #bg-video {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.05);
         }
 
-        /* NAVBAR (GÜNCELLENDİ: DAHA İNCE) */
+        /* NAVBAR (İNCELTİLDİ) */
         nav { 
             background-color: rgba(255, 255, 255, 0.95); 
-            padding: 10px 50px; /* Üst/Alt boşluk 10px'e düşürüldü (inceldi) */
+            padding: 10px 50px; /* Üst/Alt boşluk azaltıldı */
             display: flex; justify-content: space-between; align-items: center; 
             position: sticky; top: 0; z-index: 1000; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             box-sizing: border-box;
         }
         
-        /* LOGO AYARLARI (GÜNCELLENDİ: KALIN ÇERÇEVE) */
+        /* LOGO AYARLARI (ÇERÇEVELİ) */
         .logo-link img { 
             height: 80px; width: 80px; object-fit: cover;
             margin-right: 0; transition: 0.3s;
             border-radius: 50%; 
-            /* DAHA BELİRGİN ÇERÇEVE EKLENDİ */
-            border: 4px solid #fff;
+            border: 4px solid #fff; /* KALIN BEYAZ ÇERÇEVE */
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         .logo-link img:hover { opacity: 0.8; transform: scale(1.05); }

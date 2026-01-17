@@ -75,7 +75,7 @@
         }
         .chart-img:hover { transform: scale(1.03); }
 
-        /* IFRAME AYARLARI - GÜNCELLENDİ (ORTALAMA İÇİN) */
+        /* IFRAME AYARLARI (ORTALAMA AKTİF) */
         .iframe-container {
             width: 100%; 
             height: 600px; 
@@ -84,12 +84,9 @@
             overflow: hidden; 
             background-color: white;
             margin: 0 auto 30px auto; 
-            
-            /* MERKEZLEME KODLARI EKLENDİ */
             display: flex; 
             justify-content: center; 
             align-items: center;
-            
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
@@ -191,7 +188,9 @@
             <div class="chart-box">
                 <h2 class="chart-title">3. Environmental Impact: Regression Analysis</h2>
                 
-                <div class="image-container placeholder">Multiple Regression Chart Coming Soon</div>
+                <div class="image-container">
+                    <img src="regression.png" alt="Regression Analysis Chart" class="chart-img" onclick="openLightbox(this)">
+                </div>
                 
                 <p class="chart-desc">
                     Why do we tackle immense logistical challenges to move thousands of bikes every day? The answer lies in the environmental legacy of every journey. Beyond operational struggles, our Multiple Regression Model quantifies the Citi Bike network as a massive carbon-saving engine for New York City.

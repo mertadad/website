@@ -54,18 +54,19 @@
             height: 600px; 
             background-color: #f9f9f9; 
             border-radius: 8px; border: 1px solid #eee; 
-            overflow: hidden; /* Dışına taşmasın */
+            overflow: hidden; 
             display: flex; justify-content: center; align-items: center; 
         }
 
-        /* --- BURASI YENİ: RESİM ANİMASYONU --- */
+        /* --- RESİM ANİMASYONU --- */
         .chart-img { 
             width: 100%; height: 100%; object-fit: contain; 
-            transition: transform 0.3s ease; /* Yumuşak geçiş */
-            cursor: zoom-in; /* İmleç büyüteç olur */
+            transition: transform 0.3s ease; 
+            /* BURASI DEĞİŞTİ: zoom-in yerine pointer yapıldı (El işareti çıkar) */
+            cursor: pointer; 
         }
         
-        /* Üzerine gelince resim büyüsün */
+        /* Üzerine gelince resim hafif büyüsün */
         .chart-img:hover {
             transform: scale(1.03); 
         }
@@ -75,19 +76,20 @@
 
         footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
 
-        /* --- LIGHTBOX (TAM EKRAN ZOOM) STİLİ --- */
+        /* --- LIGHTBOX (TAM EKRAN ZOOM) --- */
         #lightbox {
-            display: none; /* Başlangıçta gizli */
+            display: none; 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); /* Siyah yarı şeffaf arka plan */
-            z-index: 2000; /* Her şeyin üstünde */
+            background-color: rgba(0, 0, 0, 0.9); 
+            z-index: 2000; 
             justify-content: center; align-items: center;
-            cursor: zoom-out;
+            cursor: pointer; /* Kapatmak için de el işareti çıksın */
         }
         #lightbox img {
             max-width: 90%; max-height: 90%;
             border-radius: 5px;
             box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            cursor: default; /* Resmin üzerindeyken normal ok çıksın */
         }
     </style>
 </head>
@@ -145,21 +147,20 @@
     <footer>© 2026 NYC Bike Project</footer>
 
     <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="">
-    </div>
+        <img id="lightbox-img" src="" onclick="event.stopPropagation()"> </div>
 
     <script>
         function openLightbox(imgElement) {
             var lightbox = document.getElementById('lightbox');
             var lightboxImg = document.getElementById('lightbox-img');
             
-            lightboxImg.src = imgElement.src; // Tıklanan resmin kaynağını al
-            lightbox.style.display = 'flex';  // Kutuyu görünür yap
+            lightboxImg.src = imgElement.src; 
+            lightbox.style.display = 'flex';  
         }
 
         function closeLightbox() {
             var lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none'; // Kutuyu gizle
+            lightbox.style.display = 'none'; 
         }
     </script>
 

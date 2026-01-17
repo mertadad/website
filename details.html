@@ -7,17 +7,16 @@
     <style>
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; }
         
-        /* VIDEO ARKA PLAN (Siyahlıkları Yok Eden Düzeltme) */
+        /* VIDEO ARKA PLAN */
         #bg-video {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; 
             object-fit: cover; 
             filter: blur(8px); 
-            /* BURASI DÜZELTİLDİ: 1.05 yerine 1.3 yapıldı (Diğer sayfalarla aynı oldu) */
             transform: scale(1.3); 
         }
 
-        /* NAVBAR (İnce ve Hizalı) */
+        /* NAVBAR */
         nav { 
             background-color: rgba(255, 255, 255, 0.95); 
             padding: 10px 50px; 
@@ -27,7 +26,7 @@
             box-sizing: border-box;
         }
         
-        /* LOGO (Çerçevesiz, Temiz) */
+        /* LOGO */
         .logo-link img { 
             height: 80px; width: auto; 
             margin-right: 0; transition: 0.3s;
@@ -40,15 +39,44 @@
         nav ul li a { text-decoration: none; color: #555; font-weight: 700; font-size: 20px; transition: 0.3s; }
         nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; }
 
+        /* İÇERİK KUTUSU */
         .content-box {
-            background-color: rgba(255, 255, 255, 0.95); width: 80%; max-width: 900px; margin: 60px auto; padding: 60px;
+            background-color: rgba(255, 255, 255, 0.90); 
+            width: 80%; max-width: 900px; margin: 60px auto; padding: 60px;
             border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
         h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
-        h3 { color: #00AEEF; margin-top: 40px; font-size: 1.5rem; }
-        p { line-height: 1.8; color: #555; margin-bottom: 15px; font-size: 1.1rem; }
-        ul.report-list { margin-bottom: 20px; color: #555; font-size: 1.1rem; padding-left: 20px; line-height: 1.8; }
+        h3 { color: #00AEEF; margin-top: 40px; font-size: 1.5rem; border-left: 5px solid #00AEEF; padding-left: 15px; }
         
+        /* METİN VE LİSTE AYARLARI */
+        p { line-height: 1.8; color: #555; margin-bottom: 20px; font-size: 1.1rem; text-align: justify; }
+        
+        /* Numaralı Liste (Research Questions için) */
+        ol.research-list { 
+            margin-bottom: 20px; color: #444; font-size: 1.1rem; padding-left: 20px; line-height: 1.8; 
+        }
+        ol.research-list li {
+            margin-bottom: 15px; /* Maddeler arası boşluk */
+            font-weight: 500;
+        }
+        
+        /* GERİ BUTONU */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 25px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+
         footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
     </style>
 </head>
@@ -65,25 +93,38 @@
             <li><a href="visualization.html">Visualization</a></li>
         </ul>
     </nav>
+
     <div class="content-box">
         <h1>Project Report</h1>
-        <h3>1. Introduction & Goal</h3>
+
+        <h3>Research Questions</h3>
+        <ol class="research-list">
+            <li>
+                How do the movement patterns of New York Citi Bike users across the city change according to the time of day and day of the week? What does the spatial density map look like during peak traffic hours?
+            </li>
+            <li>
+                Which stations within the network create logistical imbalances in the system when the inflow and outflow volumes are compared? In other words, which stations have excessive bicycle accumulation (sink) or persistent shortages (source)?
+            </li>
+            <li>
+                Based on past monthly data, what's the statistical explanation of the carbon emissions savings provided by the system in terms of the total distance travelled and total number of trips as independent variables, and what are the estimated savings for the coming months?
+            </li>
+        </ol>
+
+        <h3>Explanation</h3>
         <p>
-            This project aims to understand micromobility trends in New York City. 
-            The Citi Bike system has become a critical part of the city's transportation network.
+            This platform explores the dynamic movement patterns of the New York Citi Bike network—one of the world's largest bike-sharing systems—through the perspective of data analytics, spatial density, and environmental sustainability. By examining urban mobility, we aim to understand not only the efficiency of city transit but also how these shifting patterns contribute to a more sustainable future for New York City.
+        </p>
+        <p>
+            The rhythm of the city changes significantly based on the time of day and the day of the week. Our analysis explores more into user behavior to visualize the flow of bike traffic across the district. Through spatial density mapping, we highlight the significant migration between residential neighborhoods and commercial hubs during peak hours, illustrating how movement shifts from the structured commutes of the workweek to the recreation-driven patterns of the weekend.
+        </p>
+        <p>
+            Beyond general movement, the operational success of the network depends on the balance between bike inflows and outflows at individual stations. This research identifies critical logistical imbalances, pinpointing "source" stations that experience persistent shortages and "sink" stations where bikes tend to accumulate excessively. Mapping these disparities is essential for optimizing rebalancing strategies and ensuring that the system remains reliable and accessible for all users at any given time.
+        </p>
+        <p>
+            Ultimately, every bike trip represents more than just a commute; it is a measurable contribution to carbon reduction. By analyzing historical data, we utilize a statistical model to quantify carbon emission savings using total distance traveled and trip frequency as key variables. In addition to assessing past performance, we provide data-driven forecasts to estimate the environmental impact and carbon savings the system is projected to achieve in the months ahead.
         </p>
 
-        <h3>2. Dataset & Methodology</h3>
-        <p>
-            The data used in this project is sourced from the Citi Bike open data portal. 
-            The dataset includes trip duration, start/end coordinates, and user types.
-        </p>
-
-        <h3>3. Key Insights</h3>
-        <ul class="report-list">
-            <li><strong>Weather Impact:</strong> Weather conditions influence ride volume by approximately 60%.</li>
-            <li><strong>Commuter Flows:</strong> 80% of weekday traffic is directed towards major business districts.</li>
-        </ul>
+        <a href="index.html" class="back-btn">← Back to Home</a>
     </div>
 
     <footer>© 2026 NYC Bike Project</footer>

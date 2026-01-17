@@ -140,9 +140,16 @@
                 <div class="image-container">
                     <img src="heatmap.png" alt="Heatmap Chart" class="chart-img" onclick="openLightbox(this)">
                 </div>
-                <p class="chart-desc">
-                    <strong>Analysis:</strong> This heatmap illustrates high-density pick-up zones during morning rush hours. Red areas indicate heavy traffic concentration in midtown. <br>
-                    <em>(Click on the image to zoom in)</em>
+                <p class="chart-desc" style="font-size: 0.95rem; line-height: 1.6; text-align: justify;">
+                    This heatmap illustrates how New York City moves over the course of a week based on millions of data points. Darker colors represent periods of higher bike usage, and at first glance, it becomes clear that the city follows a distinctive “daily pulse”.
+                    <br><br>
+                    On weekdays, the dark blue areas around 08:00 in the morning and especially between 17:00 and 18:00 in the evening stand out immediately. This indicates that New Yorkers primarily use Citi Bike as a commuting tool to travel to and from work, often as a way to avoid traffic congestion. During weekends, however, this pattern changes significantly. Instead of riding early in the morning, users tend to bike more frequently in the afternoon, typically between 12:00 and 18:00, suggesting a shift toward recreational use. At night, the heatmap becomes nearly empty, representing the period when the system is largely inactive, and bikes are prepared for the following day.
+                    <br><br>
+                    While this visualization demonstrates how predictable bike usage patterns are, this very predictability creates a major operational challenge. Because thousands of people move in the same direction at the same time, the system faces massive pressure. This regular flow forms the foundation for the next stage of our project: understanding the resulting logistical imbalance between stations.
+                    <br><br>
+                    <em style="font-size: 0.85rem; color: #666; display: block; border-top: 1px solid #ddd; padding-top: 10px;">
+                        Note: This visualization was created by aggregating raw Citi Bike data by day and hour. The letter “k” next to the values represents thousands; for example, 740k indicates 740,000 trips were recorded during that time interval.
+                    </em>
                 </p>
             </div>
             

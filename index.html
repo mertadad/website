@@ -38,7 +38,6 @@
         .content-box {
             position: absolute; top: 45%; left: 50%;
             transform: translate(-50%, -50%);
-            /* Şeffaflık ayarı korundu (0.60) */
             background-color: rgba(255, 255, 255, 0.60);
             width: 70%; max-width: 900px; padding: 50px;
             border-radius: 12px; text-align: center;
@@ -47,26 +46,35 @@
         h1 { font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px; }
         p.subtitle { font-size: 1.3rem; color: #7f8c8d; font-weight: 300; margin-bottom: 30px; }
         
-        /* BUTON AYARLARI GÜNCELLENDİ */
+        /* --- BUTON AYARLARI (GÜNCELLENDİ) --- */
         .cta-btn { 
             background-color: #00AEEF; 
             color: white; 
-            padding: 15px 30px; /* Genişlik biraz dengelendi */
+            padding: 15px 30px; 
             text-decoration: none; 
             border-radius: 50px; 
             font-weight: bold; 
             font-size: 1.1rem; 
             display: inline-block; 
-            margin: 10px; /* Butonlar arasına boşluk koyar */
-            transition: background-color 0.3s;
+            margin: 10px;
+            /* HAREKETİN YUMUŞAK OLMASI İÇİN: */
+            transition: 0.3s; 
         }
-        .cta-btn:hover { background-color: #008ac0; }
 
-        /* İkinci buton için farklı renk istersen burayı kullanabilirsin, şimdilik aynı mavi yaptım */
-        .cta-btn-secondary {
-            background-color: #2c3e50; /* Örnek: Koyu gri renk */
+        /* ÜZERİNE GELİNCE NE OLACAK? */
+        .cta-btn:hover { 
+            background-color: #008ac0; /* Renk koyulaşır */
+            transform: scale(1.05);    /* BURASI HAREKETİ SAĞLAR (BÜYÜR) */
         }
-        .cta-btn-secondary:hover { background-color: #1a252f; }
+
+        /* Soldaki gri buton için özel renk ayarı */
+        .cta-btn-secondary {
+            background-color: #2c3e50; 
+        }
+        .cta-btn-secondary:hover { 
+            background-color: #1a252f; 
+            transform: scale(1.05); /* Bu da büyüsün */
+        }
 
         /* FOOTER */
         footer { 
@@ -100,8 +108,7 @@
             Is there a pattern to the chaos of New York City traffic? We analyzed millions of Citi Bike rides.
         </p>
         
-        <a href="details.html" class="cta-btn cta-btn-secondary">Dive into details</a>
-        
+        <a href="details.html" class="cta-btn cta-btn-secondary">Explore the Details</a>
         <a href="visualization.html" class="cta-btn">Explore the Charts</a>
     </div>
 

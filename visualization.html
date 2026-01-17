@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYC Citi Bike | Visualization</title>
     <style>
-        /* GENEL AYARLAR: Arial Font */
+        /* GENEL AYARLAR */
         body { 
             margin: 0; padding: 0; 
             font-family: Arial, sans-serif; 
@@ -18,7 +18,7 @@
             z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.3);
         }
 
-        /* Navigasyon Menüsü */
+        /* Navigasyon */
         nav { 
             background-color: rgba(255, 255, 255, 0.95); 
             padding: 10px 50px; 
@@ -36,22 +36,21 @@
         nav ul li a { text-decoration: none; color: #555; font-weight: bold; font-size: 20px; transition: 0.3s; }
         nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; }
 
-        /* Ana İçerik Kutusu */
+        /* Ana İçerik */
         .main-container { width: 85%; max-width: 1000px; margin: 40px auto; padding-bottom: 50px; }
         
-        /* Sayfa Başlığı */
         .page-title { 
             background-color: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; 
         }
 
-        /* YENİ EKLENEN METİN KUTUSU STİLİ */
+        /* Intro Kutusu */
         .intro-box {
             background-color: rgba(255, 255, 255, 0.95); 
             padding: 40px; 
             border-radius: 12px; 
             margin-bottom: 50px; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border-left: 6px solid #00AEEF; /* Sol tarafa mavi çizgi */
+            border-left: 6px solid #00AEEF; 
         }
         
         .charts-grid { display: grid; grid-template-columns: 1fr; gap: 50px; }
@@ -64,7 +63,6 @@
             padding-left: 15px; font-size: 1.8rem; margin-top: 0; margin-bottom: 20px; font-weight: bold;
         }
         
-        /* Resim Alanları */
         .image-container { 
             width: 100%; height: auto; 
             background-color: #fff; border-radius: 8px; border: 1px solid #eee; 
@@ -77,9 +75,8 @@
         }
         .chart-img:hover { transform: scale(1.03); }
 
-        /* İframe (İnteraktif Grafik) Alanı */
         .iframe-container {
-            width: 100%; height: 600px; /* Harita yüksekliği */
+            width: 100%; height: 600px; 
             border: 1px solid #eee; border-radius: 8px; overflow: hidden; background-color: white;
         }
 
@@ -92,7 +89,7 @@
 
         footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
 
-        /* Lightbox (Resim Büyütme) */
+        /* Lightbox */
         #lightbox {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.9); 
@@ -134,13 +131,15 @@
                 <strong>Follow the data below to see the hidden patterns behind every pedal stroke.</strong>
             </p>
         </div>
+
         <div class="charts-grid">
+            
             <div class="chart-box">
                 <h2 class="chart-title">1. Heatmap Analysis</h2>
                 <div class="image-container">
                     <img src="heatmap.png" alt="Heatmap Chart" class="chart-img" onclick="openLightbox(this)">
                 </div>
-                <p class="chart-desc" style="font-size: 1.20rem; line-height: 1.6; text-align: justify;">
+                <p class="chart-desc" style="font-size: 0.95rem; line-height: 1.6; text-align: justify;">
                     This heatmap illustrates how New York City moves over the course of a week based on millions of data points. Darker colors represent periods of higher bike usage, and at first glance, it becomes clear that the city follows a distinctive “daily pulse”.
                     <br><br>
                     On weekdays, the dark blue areas around 08:00 in the morning and especially between 17:00 and 18:00 in the evening stand out immediately. This indicates that New Yorkers primarily use Citi Bike as a commuting tool to travel to and from work, often as a way to avoid traffic congestion. During weekends, however, this pattern changes significantly. Instead of riding early in the morning, users tend to bike more frequently in the afternoon, typically between 12:00 and 18:00, suggesting a shift toward recreational use. At night, the heatmap becomes nearly empty, representing the period when the system is largely inactive, and bikes are prepared for the following day.
@@ -154,12 +153,28 @@
             </div>
             
             <div class="chart-box">
-                <h2 class="chart-title">2. Hourly Trends</h2>
+                <h2 class="chart-title">2. Operational Challenges: Station Imbalance</h2>
+                
                 <div class="image-container">
-                    <img src="barchart.png" alt="Bar Chart Analysis" class="chart-img" onclick="openLightbox(this)">
+                    <img src="barchart.png" alt="Station Imbalance Analysis" class="chart-img" onclick="openLightbox(this)">
                 </div>
-                <p class="chart-desc">
-                    <strong>Analysis:</strong> This bar chart displays the distribution of rides throughout the day, highlighting peak usage hours and trends.
+
+                <div style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 15px;">
+                    <img src="legend.png" alt="Chart Legend" style="max-width: 80%; height: auto; border: 1px solid #eee; padding: 10px; border-radius: 8px; background-color: #fff;">
+                </div>
+
+                <p class="chart-desc" style="font-size: 1.2rem; line-height: 1.6; text-align: justify;">
+                    While the city follows a predictable rhythm, this movement creates one of the biggest operational challenges in the New York Citi Bike network: the severe imbalance of bikes between stations. From an industrial engineer's perspective, this chart illustrates the logistical strain on the system and reveals how bicycles tend to 'cluster' in certain areas.
+                    <br><br>
+                    Based on the 'Net Balance' (Inflows - Outflows) formula, we can categorize the 30 most imbalanced stations into two distinct types:
+                    <br><br>
+                    <strong>Sources (Red Bars):</strong> These stations act as the starting points for thousands of journeys. A striking example is the Central Park West & W 68th St station, which shows a massive deficit of -72.7k, meaning thousands of riders start here but almost no one returns.
+                    <br><br>
+                    <strong>Sinks (Blue Bars):</strong> These are 'accumulation points' like Broadway & W 56th St, where bikes constantly pile up, but very few people start a new trip.
+                    <br><br>
+                    You may notice a fascinating disparity: red bars (deficits) reach as high as -70k, while the largest blue bars (excesses) only reach about +4.8k. This is not a data error, but a reflection of the 'Hub & Spoke' model of urban life. People pick up bikes in massive waves from specific hubs—like subway exits or major park entrances—creating 'giant holes' in the system. However, those riders then scatter to thousands of different destinations, returning bikes in small numbers to decentralized stations. The result is a system of 'Giant Sources' versus thousands of 'Tiny Sinks.'
+                    <br><br>
+                    This constant redistribution challenge is why Citi Bike teams must move thousands of bikes by truck every single day to prevent 'empty docks' at sources and 'no parking' at sinks. Yet, despite this logistical struggle, the scale of this movement leads to an incredible environmental achievement. In the next section, we will see how these millions of miles traveled translate into measurable carbon savings and what the future holds for the city's sustainability.
                 </p>
             </div>
             
@@ -176,10 +191,11 @@
                     <iframe src="interactive.html" width="100%" height="100%" style="border:none;"></iframe>
                 </div>
 
-                <p class="chart-desc">
+                <p class="chart-desc" style="font-size: 1.2rem;">
                     <strong>Analysis:</strong> This is an interactive network map. You can zoom in, hover over nodes to see details, and drag the map to explore different areas.
                 </p>
             </div>
+
         </div>
     </div>
     

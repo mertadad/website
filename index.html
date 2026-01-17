@@ -1,187 +1,122 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYC Citi Bike | Visualization</title>
+    <title>NYC Citi Bike | Home</title>
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; overflow-x: hidden; }
+        /* --- GENEL AYARLAR --- */
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #333; color: #333; overflow: hidden; height: 100vh; }
         
         /* VIDEO ARKA PLAN */
         #bg-video {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.3);
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%) scale(1.3);
+            object-fit: cover;
         }
 
-        /* NAVBAR */
+        /* ŞEFFAF MENÜ */
         nav { 
-            background-color: rgba(255, 255, 255, 0.95); 
-            padding: 10px 50px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            position: sticky; top: 0; z-index: 1000; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-            box-sizing: border-box;
+            position: fixed; top: 0; width: 100%; 
+            padding: 35px 50px 10px 50px; 
+            display: flex; justify-content: flex-end; 
+            background: transparent; z-index: 1000; box-sizing: border-box;
         }
-        
-        /* LOGO */
-        .logo-link img { 
-            height: 80px; width: auto; 
-            margin-right: 0; transition: 0.3s;
-        }
-        .logo-link img:hover { opacity: 0.8; transform: scale(1.05); }
         
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
         nav ul li { margin-left: 30px; }
-        nav ul li a { text-decoration: none; color: #555; font-weight: 700; font-size: 20px; transition: 0.3s; }
-        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; }
+        nav ul li a { 
+            text-decoration: none; color: white; font-weight: 700; font-size: 20px; 
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5); transition: 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active { color: #00AEEF; }
 
-        /* GRID ALANI */
-        .main-container { width: 85%; max-width: 1000px; margin: 40px auto; padding-bottom: 50px; }
-        .page-title { background-color: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 40px; }
+        /* ORTA KUTU */
+        .content-box {
+            position: absolute; top: 45%; left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.60);
+            width: 70%; max-width: 900px; padding: 50px;
+            border-radius: 12px; text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        h1 { font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px; }
+        p.subtitle { font-size: 1.3rem; color: #7f8c8d; font-weight: 300; margin-bottom: 30px; }
         
-        .charts-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 50px; 
+        /* --- BUTON AYARLARI (GÜNCELLENDİ) --- */
+        .cta-btn { 
+            background-color: #00AEEF; 
+            color: white; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 1.1rem; 
+            display: inline-block; 
+            margin: 10px;
+            /* HAREKETİN YUMUŞAK OLMASI İÇİN: */
+            transition: 0.3s; 
         }
 
-        .chart-box { background-color: rgba(255, 255, 255, 0.98); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        h2.chart-title { color: #2c3e50; border-left: 5px solid #00AEEF; padding-left: 15px; font-size: 1.8rem; margin-top: 0; margin-bottom: 20px; }
-        
-        /* GÖRSELLERİN KUTUSU (GÜNCELLENDİ) */
-        .image-container { 
-            width: 100%; 
-            /* height: 600px;  <-- BU SABİT YÜKSEKLİK SİLİNDİ */
-            height: auto;  /* Yükseklik resme göre otomatik ayarlanır */
-            background-color: #fff; /* Arka plan beyaz yapıldı */
-            border-radius: 8px; border: 1px solid #eee; 
-            overflow: hidden; 
-            /* Flex özellikleri silindi çünkü artık resim kutuyu dolduracak */
-            display: block; 
+        /* ÜZERİNE GELİNCE NE OLACAK? */
+        .cta-btn:hover { 
+            background-color: #008ac0; /* Renk koyulaşır */
+            transform: scale(1.05);    /* BURASI HAREKETİ SAĞLAR (BÜYÜR) */
         }
 
-        /* --- RESİM ANİMASYONU (GÜNCELLENDİ) --- */
-        .chart-img { 
-            width: 100%; 
-            height: auto; /* Yükseklik orantılı olsun */
-            display: block; /* Alt boşluğu engeller */
-            transition: transform 0.3s ease; 
-            cursor: pointer; 
+        /* Soldaki gri buton için özel renk ayarı */
+        .cta-btn-secondary {
+            background-color: #2c3e50; 
         }
-        
-        /* Üzerine gelince resim hafif büyüsün */
-        .chart-img:hover {
-            transform: scale(1.03); 
+        .cta-btn-secondary:hover { 
+            background-color: #1a252f; 
+            transform: scale(1.05); /* Bu da büyüsün */
         }
 
-        .placeholder { 
-            color: #aaa; font-weight: bold; font-size: 1.5rem; border: 2px dashed #ddd; background: #fdfdfd; 
-            /* Placeholder için yükseklik hala gerekli olabilir, o yüzden buraya ekleyelim */
-            height: 400px; 
-            display: flex; justify-content: center; align-items: center;
+        /* FOOTER */
+        footer { 
+            position: absolute; bottom: 0; width: 100%;
+            padding: 30px 50px; 
+            display: flex; justify-content: space-between; align-items: flex-end;
+            color: white; box-sizing: border-box;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
-        
-        .chart-desc { margin-top: 20px; color: #666; font-size: 1.1rem; line-height: 1.6; background-color: #f0f8ff; padding: 15px; border-radius: 5px; }
-
-        footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
-
-        /* --- LIGHTBOX (TAM EKRAN ZOOM) --- */
-        #lightbox {
-            display: none; 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); 
-            z-index: 2000; 
-            justify-content: center; align-items: center;
-            cursor: pointer; 
-        }
-        #lightbox img {
-            max-width: 90%; max-height: 90%;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            cursor: default; 
-        }
+        .footer-title { font-weight: bold; font-size: 1.2rem; }
+        .footer-names { text-align: left; font-size: 1.2rem; line-height: 1.5; font-weight: 600; }
     </style>
 </head>
 <body>
-    <video muted loop playsinline id="bg-video">
+    <video autoplay muted loop playsinline id="bg-video">
         <source src="background.mp4" type="video/mp4">
     </video>
     
     <nav>
-        <a href="index.html" class="logo-link"><img src="logo.png" alt="Home Logo"></a>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
             <li><a href="details.html">Project Details</a></li>
-            <li><a href="visualization.html" class="active">Visualization</a></li>
+            <li><a href="visualization.html">Visualization</a></li>
         </ul>
     </nav>
 
-    <div class="main-container">
-        <div class="page-title">
-            <h1 style="margin:0; color:#333;">Data Visualizations</h1>
-        </div>
-
-        <div class="charts-grid">
-            <div class="chart-box">
-                <h2 class="chart-title">1. Heatmap Analysis</h2>
-                <div class="image-container">
-                    <img src="heatmap.png" alt="Heatmap Chart" class="chart-img" onclick="openLightbox(this)">
-                </div>
-                <p class="chart-desc">
-                    <strong>Analysis:</strong> This heatmap illustrates high-density pick-up zones during morning rush hours. Red areas indicate heavy traffic concentration in midtown. <br>
-                    <em>(Click on the image to zoom in)</em>
-                </p>
-            </div>
-            
-            <div class="chart-box">
-                <h2 class="chart-title">2. Hourly Trends</h2>
-                <div class="image-container placeholder">Chart 2 Coming Soon</div>
-                <p class="chart-desc"><strong>Analysis:</strong> Description area for the second chart.</p>
-            </div>
-            
-            <div class="chart-box">
-                <h2 class="chart-title">3. User Demographics</h2>
-                <div class="image-container placeholder">Chart 3 Coming Soon</div>
-                <p class="chart-desc"><strong>Analysis:</strong> Description area for the third chart.</p>
-            </div>
-            
-            <div class="chart-box">
-                <h2 class="chart-title">4. Station Network</h2>
-                <div class="image-container placeholder">Chart 4 Coming Soon</div>
-                <p class="chart-desc"><strong>Analysis:</strong> Description area for the fourth chart.</p>
-            </div>
-        </div>
-    </div>
-    
-    <footer>© 2026 NYC Bike Project</footer>
-
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" onclick="event.stopPropagation()"> 
+    <div class="content-box">
+        <h1>NYC Bike Sharing Analysis</h1>
+        <p class="subtitle">Unlocking the City's Rhythm with Data</p>
+        <p style="font-size: 1.1rem; color: #555; line-height: 1.6;">
+            Is there a pattern to the chaos of New York City traffic? We analyzed millions of Citi Bike rides.
+        </p>
+        
+        <a href="details.html" class="cta-btn cta-btn-secondary">Explore the Details</a>
+        <a href="visualization.html" class="cta-btn">Explore the Charts</a>
     </div>
 
-    <script>
-        function openLightbox(imgElement) {
-            var lightbox = document.getElementById('lightbox');
-            var lightboxImg = document.getElementById('lightbox-img');
-            
-            lightboxImg.src = imgElement.src; 
-            lightbox.style.display = 'flex';  
-        }
-
-        function closeLightbox() {
-            var lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none'; 
-        }
-
-        // ESC TUŞU DİNLEYİCİSİ
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") { 
-                closeLightbox(); 
-            }
-        });
-    </script>
-
+    <footer>
+        <div class="footer-title">2025-2026 IE 421 Data Science for Engineering Term Project</div>
+        <div class="footer-names">
+            Bersu Yılmaz<br>Emirhan Karaca<br>Mert Ada Demirbaş<br>Veli Erenay Açıl
+        </div>
+    </footer>
 </body>
 </html>

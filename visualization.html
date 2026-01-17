@@ -48,19 +48,23 @@
         .chart-box { background-color: rgba(255, 255, 255, 0.98); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         h2.chart-title { color: #2c3e50; border-left: 5px solid #00AEEF; padding-left: 15px; font-size: 1.8rem; margin-top: 0; margin-bottom: 20px; }
         
-        /* GÖRSELLERİN KUTUSU */
+        /* GÖRSELLERİN KUTUSU (GÜNCELLENDİ) */
         .image-container { 
             width: 100%; 
-            height: 600px; 
-            background-color: #f9f9f9; 
+            /* height: 600px;  <-- BU SABİT YÜKSEKLİK SİLİNDİ */
+            height: auto;  /* Yükseklik resme göre otomatik ayarlanır */
+            background-color: #fff; /* Arka plan beyaz yapıldı */
             border-radius: 8px; border: 1px solid #eee; 
             overflow: hidden; 
-            display: flex; justify-content: center; align-items: center; 
+            /* Flex özellikleri silindi çünkü artık resim kutuyu dolduracak */
+            display: block; 
         }
 
-        /* --- RESİM ANİMASYONU --- */
+        /* --- RESİM ANİMASYONU (GÜNCELLENDİ) --- */
         .chart-img { 
-            width: 100%; height: 100%; object-fit: contain; 
+            width: 100%; 
+            height: auto; /* Yükseklik orantılı olsun */
+            display: block; /* Alt boşluğu engeller */
             transition: transform 0.3s ease; 
             cursor: pointer; 
         }
@@ -70,7 +74,13 @@
             transform: scale(1.03); 
         }
 
-        .placeholder { color: #aaa; font-weight: bold; font-size: 1.5rem; border: 2px dashed #ddd; background: #fdfdfd; }
+        .placeholder { 
+            color: #aaa; font-weight: bold; font-size: 1.5rem; border: 2px dashed #ddd; background: #fdfdfd; 
+            /* Placeholder için yükseklik hala gerekli olabilir, o yüzden buraya ekleyelim */
+            height: 400px; 
+            display: flex; justify-content: center; align-items: center;
+        }
+        
         .chart-desc { margin-top: 20px; color: #666; font-size: 1.1rem; line-height: 1.6; background-color: #f0f8ff; padding: 15px; border-radius: 5px; }
 
         footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
@@ -79,7 +89,6 @@
         #lightbox {
             display: none; 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            /* GÜNCELLENEN KISIM: 1.0 yerine 0.8 yapıldı (Arka plan görünür) */
             background-color: rgba(0, 0, 0, 0.9); 
             z-index: 2000; 
             justify-content: center; align-items: center;

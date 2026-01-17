@@ -75,9 +75,17 @@
         }
         .chart-img:hover { transform: scale(1.03); }
 
+        /* IFRAME (INTERACTIVE MAP) AYARLARI - GÜNCELLENDİ */
         .iframe-container {
-            width: 100%; height: 600px; 
-            border: 1px solid #eee; border-radius: 8px; overflow: hidden; background-color: white;
+            width: 100%; /* Beyaz kutunun genişliğini tam kaplar */
+            height: 600px; 
+            border: 1px solid #ddd; /* Hafif bir çerçeve */
+            border-radius: 8px; 
+            overflow: hidden; 
+            background-color: white;
+            margin: 0 auto 30px auto; /* Ortalar ve altına boşluk bırakır */
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Şık bir gölge */
         }
 
         .placeholder { 
@@ -188,7 +196,7 @@
                 <h2 class="chart-title">4. Station Network (Interactive)</h2>
                 
                 <div class="iframe-container">
-                    <iframe src="interactive.html" width="100%" height="100%" style="border:none;"></iframe>
+                    <iframe src="interactive.html" width="100%" height="100%" style="border:none;" scrolling="no"></iframe>
                 </div>
 
                 <p class="chart-desc" style="font-size: 1.2rem; line-height: 1.6; text-align: justify;">

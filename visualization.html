@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Citi Bike | Visualization</title>
+    <style>
+        body { 
+            margin: 0; padding: 0; 
+            font-family: Arial, sans-serif; 
+            background-color: #333; color: #333; overflow-x: hidden; 
+        }
+        /* Yol: ../Visuals/ */
+        #bg-video {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.3);
+        }
+        nav { 
+            background-color: rgba(255, 255, 255, 0.95); padding: 10px 50px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
+        }
+        .logo-link img { height: 80px; width: auto; margin-right: 0; transition: 0.3s; }
+        .logo-link img:hover { opacity: 0.8; transform: scale(1.05); }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { text-decoration: none; color: #555; font-weight: bold; font-size: 20px; transition: 0.3s; }
+        nav ul li a:hover, nav ul li a.active { color: #00AEEF; border-bottom: 3px solid #00AEEF; }
+        .main-container { width: 85%; max-width: 1000px; margin: 40px auto; padding-bottom: 50px; }
+        .page-title { 
+            background-color: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; 
+        }
+        .intro-box {
+            background-color: rgba(255, 255, 255, 0.95); padding: 30px; 
+            border-radius: 12px; margin-bottom: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .section-header {
+            color: #2c3e50; border-left: 5px solid #00AEEF; padding-left: 15px; 
+            font-size: 2rem; margin-top: 0; margin-bottom: 20px; font-weight: bold;
+        }
+        .charts-grid { display: grid; grid-template-columns: 1fr; gap: 50px; }
+        .chart-box { background-color: rgba(255, 255, 255, 0.98); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        h2.chart-title { 
+            color: #2c3e50; border-left: 5px solid #00AEEF; padding-left: 15px; font-size: 1.8rem; margin-top: 0; margin-bottom: 20px; font-weight: bold;
+        }
+        .image-container { 
+            width: 100%; height: auto; background-color: #fff; border-radius: 8px; border: 1px solid #eee; 
+            overflow: hidden; display: block; 
+        }
+        .chart-img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; cursor: pointer; }
+        .chart-img:hover { transform: scale(1.03); }
+        .iframe-container {
+            width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; 
+            background-color: white; margin: 0 auto 30px auto; display: flex; justify-content: center; 
+            align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .chart-desc { margin-top: 20px; color: #444; font-size: 1.2rem; line-height: 1.6; background-color: #f9fbfd; padding: 20px; border-radius: 8px; text-align: justify; }
+        footer { text-align: center; color: #ddd; padding: 20px; font-size: 0.9rem; margin-top: 20px; }
+        #lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); z-index: 2000; justify-content: center; align-items: center; cursor: pointer; 
+        }
+        #lightbox img {
+            max-width: 90%; max-height: 90%; border-radius: 5px; box-shadow: 0 0 20px rgba(255,255,255,0.2); cursor: default; 
+        }
+    </style>
+</head>
+<body>
+    <video muted loop playsinline id="bg-video">
+        <source src="../Visuals/background.mp4" type="video/mp4">
+    </video>
+    
+    <nav>
+        <a href="../index.html" class="logo-link"><img src="../Visuals/logo.png" alt="Home Logo"></a>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="details.html">Project Details</a></li>
+            <li><a href="visualization.html" class="active">Visualization</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        
+        <div class="page-title">
+            <h1 style="margin:0; color:#333; font-weight: bold;">Data Visualizations</h1>
+        </div>
+
+        <div class="intro-box">
+            <h2 class="section-header">Data in Motion: Visualizing NYC’s Citi Bike Network</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #444; margin-top: 0;"> 
+                Numbers tell a story, but visualizations bring that story to life. This project transforms millions of data points into a narrative of urban movement, revealing the heartbeat of New York City.
+                <br><br>
+                Throughout this journey, we will uncover the city’s daily rhythm, expose the logistical struggles of station imbalances, and quantify the environmental impact of green commuting. Finally, you will have the tools to explore these patterns yourself.
+                <br><br>
+                <strong>Follow the data below to see the hidden patterns behind every pedal stroke.</strong>
+            </p>
+        </div>
+
+        <div class="charts-grid">
+            
+            <div class="chart-box">
+                <h2 class="chart-title">1. Heatmap Analysis</h2>
+                <div class="image-container">
+                    <img src="../Visuals/heatmap.png" alt="Heatmap Chart" class="chart-img" onclick="openLightbox(this)">
+                </div>
+                <p class="chart-desc">
+                    This heatmap illustrates New York City’s distinctive “daily pulse” through millions of data points. Weekday peaks at 08:00 and between 17:00–18:00 highlight Citi Bike’s critical role as a primary commuting tool used to bypass traffic congestion. During weekends, however, the pattern shifts significantly toward the afternoon, reflecting a transition from work-related travel to recreational use.
+                    <br><br>
+                    While this visualization demonstrates how predictable urban movement can be, this very predictability creates a major operational challenge. Because thousands of people move in the same direction at the exact same time, the system faces massive pressure. This regular flow forms the foundation for the next stage of our project: understanding the resulting logistical imbalance between stations.
+                    <br><br>
+                    <em style="color: #666; font-size: 1.1rem; display: block; margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px;">
+                        Note: Data represents the general average from November 2024 to October 2025. The letter “k” represents thousands (e.g., 740k indicates 740,000 trips).
+                    </em>
+                </p>
+            </div>
+            
+            <div class="chart-box">
+                <h2 class="chart-title">2. Operational Challenges: Station Imbalance</h2>
+                
+                <div class="image-container">
+                    <img src="../Visuals/barchart.png" alt="Station Imbalance Analysis" class="chart-img" onclick="openLightbox(this)">
+                </div>
+
+                <div style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 15px; width: 100%;">
+                    <img src="../Visuals/legend.png" alt="Chart Legend" style="width: 100%; height: 100px; object-fit: fill; border: 1px solid #eee; padding: 10px; border-radius: 8px; background-color: #fff;">
+                </div>
+
+                <p class="chart-desc">
+                    While the city follows a predictable rhythm, this movement creates a severe imbalance of bikes between stations. From an industrial engineer's perspective, this chart illustrates the logistical strain on the system by highlighting the 30 most imbalanced stations based on the 'Net Balance' (Inflows - Outflows) formula.
+                    <br><br>
+                    <strong>Sources (Red Bars):</strong> These are starting points for thousands of journeys, such as Central Park West & W 68th St, which shows a massive deficit of -72.7k.
+                    <br><br>
+                    <strong>Sinks (Blue Bars):</strong> These are accumulation points like Broadway & W 56th St, where bikes pile up but few new trips begin.
+                    <br><br>
+                    A fascinating disparity exists: red bars reach as high as -70k, while blue bars only reach about +4.8k. This reflects the 'Hub & Spoke' model of urban life, where riders pick up bikes in massive waves from specific hubs (subways or park entrances) but scatter to thousands of decentralized destinations. The result is a system of "Giant Sources" versus thousands of "Tiny Sinks".
+                    <br><br>
+                    This imbalance requires Citi Bike teams to move thousands of bikes by truck daily to prevent empty docks or full stations. Despite this logistical struggle, the scale of this movement leads to an incredible environmental achievement, which we will quantify in the next section.
+                </p>
+            </div>
+            
+            <div class="chart-box">
+                <h2 class="chart-title">3. Environmental Impact: Regression Analysis</h2>
+                
+                <div class="image-container">
+                    <img src="../Visuals/regression.png" alt="Regression Analysis Chart" class="chart-img" onclick="openLightbox(this)">
+                </div>
+                
+                <p class="chart-desc">
+                    Why do we tackle immense logistical challenges to move thousands of bikes every day? The answer lies in the environmental legacy of every journey. Beyond operational struggles, our Multiple Regression Model quantifies the Citi Bike network as a massive carbon-saving engine for New York City.
+                    <br><br>
+                    With an R-squared value reaching near one and a high F-statistic, our model proves that distance traveled is the primary driver of carbon savings. As shown in the visualization, where the color depth represents increasing trip counts, there is a near-perfect correlation between the miles covered and the reduction in greenhouse gases. The data reveals a powerful truth: every kilometer pedaled prevents about 146 grams of toxic gases from entering our atmosphere. Over our nearly three-year dataset, the 3,000 tons of CO<sub>2</sub> saved is equivalent to the air-purifying power of over 150,000 mature trees.
+                    <br><br>
+                    This analysis proves that every operational fix directly accelerates New York’s green goals. Behind the logistical chaos is a silent, powerful forest growing with every pedal stroke. Now, you can witness this living network in action and explore the interactive map below.
+                </p>
+            </div>
+            
+            <div class="chart-box">
+                <h2 class="chart-title">4. Station Network (Interactive)</h2>
+                
+                <div class="iframe-container">
+                    <iframe src="../Visuals/interactive.html" width="100%" height="100%" style="border:none; display:block;" scrolling="no"></iframe>
+                </div>
+
+                <p class="chart-desc">
+                    <em style="color: #666; display: block; margin-bottom: 20px;">Please switch to dual map view and then close current panel on the top right corner for a better experience.</em>
+                    
+                    It is time to see the system in action. This interactive map brings the entire NYC Citi Bike network to life, allowing you to witness a simulated "typical day" in New York. Instead of a single date in history, this visualization reveals how the city breathes across all five boroughs based on averages calculated from November 2024 to October 2025.
+                    <br><br>
+                    Explore the network through these interactive features:
+                    <br><br>
+                    <strong>Size and Scale:</strong> Marker height reacts to real-time usage, highlighting the city's busiest hubs.
+                    <br><br>
+                    <strong>Dynamic Color Coding:</strong> Colors represent the "Net Balance"—red markers are Sources (more departures), while blue markers are Sinks (more arrivals).
+                    <br><br>
+                    <strong>Station Details:</strong> Click any station to see its name and exact balance at any moment in the cycle.
+                    <br><br>
+                    This tool transforms abstract numbers into a tangible experience. Whether it’s the morning tidal wave into Manhattan or the evening return to residential neighborhoods, you can now see exactly how the logistical challenges we discussed play out on your own street or at your favorite park.
+
+                    <br><br>
+                    <em style="color: #666; display: block; margin-top: 10px;">(Data represents the general average from November 2024 to October 2025 mapped to a 24-hour cycle.)</em>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="intro-box" style="margin-top: 50px;">
+            <h2 class="section-header">Conclusion</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #444; margin-top: 0; text-align: justify;">
+                This project reveals the NYC Citi Bike network as a complex ecosystem where data-driven insights drive urban sustainability. By linking predictable daily rhythms to logistical imbalances, we demonstrate how every operational fix supports a greener purpose. Our analysis proves the network saves thousands of tons of CO<sub>2</sub>—the equivalent of well over a hundred thousand trees. Ultimately, every pedal stroke is a measurable step toward a more efficient and sustainable New York.
+            </p>
+        </div>
+
+    </div>
+    
+    <footer>© 2026 NYC Bike Project</footer>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" onclick="event.stopPropagation()"> 
+    </div>
+
+    <script>
+        function openLightbox(imgElement) {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgElement.src; 
+            lightbox.style.display = 'flex';  
+        }
+        function closeLightbox() {
+            var lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none'; 
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") { closeLightbox(); }
+        });
+    </script>
+</body>
+</html>
